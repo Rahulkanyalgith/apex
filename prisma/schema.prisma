@@ -1,0 +1,72 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model ReachUs {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  email     String
+  mobileNo  String
+  message   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Committee {
+  id            String      @id @default(auto()) @map("_id") @db.ObjectId
+  name          String      @unique
+  price         Int         @default(0)
+  portfolio     Portfolio[]
+  totallyBooked Boolean     @default(false)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+model Portfolio {
+  id          String     @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  booked      Boolean    @default(false)
+  Committee   Committee? @relation(fields: [committeeId], references: [id])
+  committeeId String?    @db.ObjectId
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+model Register {
+  id                       String   @id @default(auto()) @map("_id") @db.ObjectId
+  name                     String
+  email                    String
+  mobileNo                 String
+  schoolCollege            String
+  classYear                String
+  munExperience            String
+  age                      String
+  committeeID              String
+  committeeName            String
+  portfolioID              String
+  portfolioName            String
+  ref                      String
+  paymentMethod            String
+  cardPayment              String?
+  cardLast4No              String?
+  cardNetwork              String?
+  cardType                 String?
+  cardName                 String?
+  bankPayment              String?
+  walletPayment            String?
+  vpa                      String?
+  razorpayUpiTranscationId String?
+  razorpayBankranscationId String?
+  razorpayOrderId          String
+  razorpayPaymentId        String
+  razorpaySignature        String
+  paymentAmount            Int
+  paymentStatus            String
+  createdAt                DateTime @default(now())
+  updatedAt                DateTime @updatedAt
+}
