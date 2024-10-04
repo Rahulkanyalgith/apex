@@ -147,7 +147,6 @@ function page() {
             const parsedData = JSON.parse(decryptedData);
             setCommitteeData(parsedData);
         } catch (error) {
-            console.log(error);
             toast("Error: While Fetching & Decrypting Data!");
         }
     };
@@ -169,11 +168,8 @@ function page() {
             const priceBytes = CryptoJS.AES.decrypt(encryptedPriceData, process.env.NEXT_PUBLIC_SECRET_KEY);
             const decryptedPriceData = priceBytes.toString(CryptoJS.enc.Utf8);
             const parsedPriceData = JSON.parse(decryptedPriceData);
-            const price = parsedPriceData.price;
-            const updatedPrice = price + (price * 5 / 100);
-            setPrice(updatedPrice);
+            setPrice(parsedPriceData.price + ((parsedPriceData.price * 5) / 100));
         } catch (error) {
-            console.log(error);
             toast("Error: While Fetching & Decrypting Data!");
         }
     };
