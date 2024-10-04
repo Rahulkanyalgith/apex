@@ -240,8 +240,7 @@ function page() {
                             </div>
                             <ul className="pl-5 text-sm list-disc">
                                 <li>The delegation fee is <span className="font-bold">non-refundable</span>.</li>
-                                <li>A <span className="font-bold">transaction fee</span> will be applicable.</li>
-                                <li><span className="font-bold">18% GST</span> will be charged on the total amount.</li>
+                                <li>A <span className="font-bold">5% transaction fee</span> will be applicable.</li>
                             </ul>
                             <div className="flex items-center gap-4">
                                 <input type="checkbox" required checked={isChecked} onChange={handleCheckboxChange} />
