@@ -10,13 +10,19 @@ const razorpay = new Razorpay({
 export async function POST(req, res) {
     try {
 
-        // const { committeeID } = await req.body();
+        const { committeeID } = await req.json();
 
-        // const Committee = await prisma.committee.findUnique({
-        //     where: {
-        //         id: committeeID
-        //     },
-        // });
+        console.log(committeeID);
+
+
+        const Committee = await prisma.committee.findUnique({
+            where: {
+                id: committeeID
+            },
+        });
+
+        console.log(committeeID);
+
 
         const billId = `bill_${Date.now()}_${Math.random().toString(36).substring(2, 15)}`;
         const order = await razorpay.orders.create({
@@ -31,7 +37,7 @@ export async function POST(req, res) {
 
         const encryptedData = CryptoJS.AES.encrypt(JSON.stringify(order), process.env.SECRET_KEY).toString();
 
-        return NextResponse.json({ Response: order })
+        return NextResponse.json({ Response: encryptedData })
     } catch {
         return NextResponse.json({ Response: "Error While Creating Payment Order!" });
     }

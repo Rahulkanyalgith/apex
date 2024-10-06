@@ -21,7 +21,7 @@ function page() {
     const router = useRouter();
 
     const [committeeData, setCommitteeData] = useState([]);
-    const [committeeID, setcommitteeID] = useState("");
+    const [committeeID, setCommitteeID] = useState("");
     const [portfolioID, setPortfolioID] = useState("");
     const [portfolioID1, setPortfolioID1] = useState("");
     const [portfolioID2, setPortfolioID2] = useState("");
@@ -39,8 +39,9 @@ function page() {
     const [isChecked, setIsChecked] = useState(false);
 
     const handlePayment = async () => {
-        // setPaymentProcessing(true);
+        setPaymentProcessing(true);
 
+        try {
             if (!process.env.NEXT_PUBLIC_SECRET_KEY) {
                 toast("Server Error: Missing Encryption Key!");
             }
@@ -49,13 +50,10 @@ function page() {
                 committeeID
             });
 
-            console.log(payment.data.Response);
-            const parsedData = payment.data.Response;
-            console.log(parsedData);
-            // const encryptedData = payment.data.Response;
-            // const bytes = CryptoJS.AES.decrypt(encryptedData, process.env.NEXT_PUBLIC_SECRET_KEY);
-            // const decryptedData = bytes.toString(CryptoJS.enc.Utf8);
-            // const parsedData = JSON.parse(decryptedData);
+            const encryptedData = payment.data.Response;
+            const bytes = CryptoJS.AES.decrypt(encryptedData, process.env.NEXT_PUBLIC_SECRET_KEY);
+            const decryptedData = bytes.toString(CryptoJS.enc.Utf8);
+            const parsedData = JSON.parse(decryptedData);
             if (parsedData.id) {
                 const options = {
                     key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
@@ -66,7 +64,6 @@ function page() {
                     order_id: parsedData.id,
                     handler: async function (payment) {
                         try {
-
                             console.log(process.env.NEXT_PUBLIC_URL);
                             console.log(process.env.NEXT_PUBLIC_SECRET_KEY);
                             console.log(process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID);
@@ -118,30 +115,29 @@ function page() {
                 rzp.open();
             }
             else {
-                alert('Payment initiation failed');
+                toast("Error: While Initiating Payment!");
             }
-        // }
-        // catch (error) {
-        //     console.log(error);
-        //     toast("Error: While Initiating Payment!");
-        // }
-        // finally {
-        //     setPaymentProcessing(false);
-        //     setcommitteeID("");
-        //     setPortfolioID("");
-        //     setPortfolioID1("");
-        //     setPortfolioID2("");
-        //     setPrice(0);
-        //     setName("");
-        //     setEmail("");
-        //     setMobileNo("");
-        //     setSchoolCollege("");
-        //     setClassYear("");
-        //     setMunExperience("");
-        //     setAge("");
-        //     setRef("");
-        //     setIsChecked(false);
-        // }
+        }
+        catch (error) {
+            toast("Error: While Initiating Payment!");
+        }
+        finally {
+            setPaymentProcessing(false);
+            setcommitteeID("");
+            setPortfolioID("");
+            setPortfolioID1("");
+            setPortfolioID2("");
+            setPrice(0);
+            setName("");
+            setEmail("");
+            setMobileNo("");
+            setSchoolCollege("");
+            setClassYear("");
+            setMunExperience("");
+            setAge("");
+            setRef("");
+            setIsChecked(false);
+        }
     }
 
     const handleCheckboxChange = () => {
@@ -177,7 +173,7 @@ function page() {
             const decryptedData = bytes.toString(CryptoJS.enc.Utf8);
             const parsedData = JSON.parse(decryptedData);
             setPortfolioData(parsedData);
-            setcommitteeID(id);
+            setCommitteeID(id);
             const encryptedPriceData = res.data.Data;
             const priceBytes = CryptoJS.AES.decrypt(encryptedPriceData, process.env.NEXT_PUBLIC_SECRET_KEY);
             const decryptedPriceData = priceBytes.toString(CryptoJS.enc.Utf8);
