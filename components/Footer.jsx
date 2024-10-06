@@ -5,7 +5,7 @@ import Image from 'next/image'
 
 function Footer() {
   return (
-    <div className="flex flex-col items-center justify-center w-full bg-green-200 rounded-br-[12rem] lg:rounded-br-full pt-14 pb-10 md:p-10 lg:p-20">
+    <div className="flex flex-col items-center justify-center w-full pb-10 bg-green-200 pt-14 md:p-10 lg:p-20">
       <div className="flex flex-col w-11/12 gap-10">
         <div className="flex flex-col items-center justify-between gap-20 xl:flex-row">
           <Link href="/" className="flex items-start w-full xl:w-auto">
@@ -26,6 +26,7 @@ function Footer() {
         <div className="w-full h-1 border-b border-black"></div>
         <div className="flex flex-col items-center justify-between gap-2 lg:flex-row">
           <div className="font-semibold md:text-xl">Copyright © 2024 · All Rights Reserved</div>
+          <div className="font-semibold md:text-xl">Built By Harshit Ostwal</div>
         </div>
       </div>
     </div>
