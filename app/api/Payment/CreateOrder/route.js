@@ -1,6 +1,7 @@
 import Razorpay from "razorpay";
 import CryptoJS from "crypto-js";
 import { NextResponse } from "next/server";
+import prisma from "@/lib/prismadb"
 
 const razorpay = new Razorpay({
     key_id: process.env.RAZORPAY_KEY_ID,
@@ -10,25 +11,17 @@ const razorpay = new Razorpay({
 export async function POST(req, res) {
     try {
 
-        // const { committeeID } = await req.json();
-        // console.log(committeeID);
+        const { committeeID } = await req.json();
 
-        // const Committee = await prisma.committee.findUnique({
-        //     where: {
-        //         id: committeeID
-        //     },
-        // });
-
-        const body = await req.json();
-        const { committeeID } = body;
-
-        console.log("Received committeeID:", committeeID);
-
-        // console.log(committeeID, Committee.price);
+        const Committee = await prisma.committee.findUnique({
+            where: {
+                id: committeeID
+            },
+        });
 
         const billId = `bill_${Date.now()}_${Math.random().toString(36).substring(2, 15)}`;
         const order = await razorpay.orders.create({
-            amount: 100 * 100,
+            amount: (Committee.price + (Committee.price * 5) / 100) * 100,
             currency: "INR",
             receipt: billId,
         });

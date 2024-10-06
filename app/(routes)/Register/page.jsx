@@ -47,7 +47,7 @@ function page() {
             }
 
             const payment = await axios.post(`${process.env.NEXT_PUBLIC_URL}/api/Payment/CreateOrder`, {
-                committeeID: committeeID
+                committeeID
             });
 
             const encryptedData = payment.data.Response;
@@ -123,7 +123,7 @@ function page() {
         }
         finally {
             setPaymentProcessing(false);
-            setcommitteeID("");
+            setCommitteeID("");
             setPortfolioID("");
             setPortfolioID1("");
             setPortfolioID2("");
@@ -156,7 +156,7 @@ function page() {
             const decryptedData = bytes.toString(CryptoJS.enc.Utf8);
             const parsedData = JSON.parse(decryptedData);
             setCommitteeData(parsedData);
-        } catch (error) {
+        } catch {
             toast("Error: While Fetching & Decrypting Data!");
         }
     };
