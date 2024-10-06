@@ -49,6 +49,9 @@ function page() {
         const payment = await axios.post(`${process.env.NEXT_PUBLIC_URL}/api/Payment/CreateOrder`, {
             committeeID
         });
+
+        console.log(committeeID);
+        
         console.log(process.env.NEXT_PUBLIC_URL);
         console.log(process.env.NEXT_PUBLIC_SECRET_KEY);
         console.log(process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID);
