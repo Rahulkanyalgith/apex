@@ -65,6 +65,10 @@ function page() {
                     handler: async function (payment) {
                         try {
 
+                            console.log(process.env.NEXT_PUBLIC_URL);
+                            console.log(process.env.NEXT_PUBLIC_SECRET_KEY);
+                            console.log(process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID);
+                            
                             const res = await axios.post(`${process.env.NEXT_PUBLIC_URL}/api/Payment/VerifyPayment`, {
                                 name: name,
                                 email: email,
