@@ -42,82 +42,80 @@ function page() {
         setPaymentProcessing(true);
 
         // try {
-            if (!process.env.NEXT_PUBLIC_SECRET_KEY) {
-                toast("Server Error: Missing Encryption Key!");
-            }
+        if (!process.env.NEXT_PUBLIC_SECRET_KEY) {
+            toast("Server Error: Missing Encryption Key!");
+        }
 
-            const payment = await axios.post(`${process.env.NEXT_PUBLIC_URL}/api/Payment/CreateOrder`, {
-                committeeID
-            });
+        const payment = await axios.post(`${process.env.NEXT_PUBLIC_URL}/api/Payment/CreateOrder`, {
+            committeeID
+        });
+        console.log(process.env.NEXT_PUBLIC_URL);
+        console.log(process.env.NEXT_PUBLIC_SECRET_KEY);
+        console.log(process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID);
+        const encryptedData = payment.data.Response;
+        const bytes = CryptoJS.AES.decrypt(encryptedData, process.env.NEXT_PUBLIC_SECRET_KEY);
+        const decryptedData = bytes.toString(CryptoJS.enc.Utf8);
+        const parsedData = JSON.parse(decryptedData);
+        if (parsedData.id) {
+            const options = {
+                key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+                amount: parsedData.amount,
+                currency: parsedData.currency,
+                name: 'Apex Mun',
+                description: 'Test Transaction',
+                order_id: parsedData.id,
+                handler: async function (payment) {
+                    try {
 
-            const encryptedData = payment.data.Response;
-            const bytes = CryptoJS.AES.decrypt(encryptedData, process.env.NEXT_PUBLIC_SECRET_KEY);
-            const decryptedData = bytes.toString(CryptoJS.enc.Utf8);
-            const parsedData = JSON.parse(decryptedData);
-            if (parsedData.id) {
-                const options = {
-                    key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
-                    amount: parsedData.amount,
-                    currency: parsedData.currency,
-                    name: 'Apex Mun',
-                    description: 'Test Transaction',
-                    order_id: parsedData.id,
-                    handler: async function (payment) {
-                        try {
+                        const res = await axios.post(`${process.env.NEXT_PUBLIC_URL}/api/Payment/VerifyPayment`, {
+                            name: name,
+                            email: email,
+                            mobileNo: mobileNo,
+                            schoolCollege: schoolCollege,
+                            classYear: classYear,
+                            munExperience: munExperience,
+                            age: age,
+                            committeeID: committeeID,
+                            portfolioID: portfolioID,
+                            portfolioID1: portfolioID1,
+                            portfolioID2: portfolioID2,
+                            ref: ref,
+                            razorpayOrderId: payment.razorpay_order_id,
+                            razorpayPaymentId: payment.razorpay_payment_id,
+                            razorpaySignature: payment.razorpay_signature,
+                            paymentAmount: parsedData.amount,
+                        });
 
-                            console.log(process.env.NEXT_PUBLIC_URL);
-                            console.log(process.env.NEXT_PUBLIC_SECRET_KEY);
-                            console.log(process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID);
-                            
-                            const res = await axios.post(`${process.env.NEXT_PUBLIC_URL}/api/Payment/VerifyPayment`, {
-                                name: name,
-                                email: email,
-                                mobileNo: mobileNo,
-                                schoolCollege: schoolCollege,
-                                classYear: classYear,
-                                munExperience: munExperience,
-                                age: age,
-                                committeeID: committeeID,
-                                portfolioID: portfolioID,
-                                portfolioID1: portfolioID1,
-                                portfolioID2: portfolioID2,
-                                ref: ref,
-                                razorpayOrderId: payment.razorpay_order_id,
-                                razorpayPaymentId: payment.razorpay_payment_id,
-                                razorpaySignature: payment.razorpay_signature,
-                                paymentAmount: parsedData.amount,
-                            });
-
-                            if (res.data.Verification) {
-                                router.replace(`/Payment-Success?paymentID=${payment.razorpay_order_id}`)
-                                toast.success("Payment Successfull.");
-                                setTimeout(() => {
-                                    toast.success("Thank You For Registering Your Community!");
-                                }, 2000);
-                            }
-                            else {
-                                toast.error("Error: Payment Verification Failed!");
-                            }
-                        } catch {
+                        if (res.data.Verification) {
+                            router.replace(`/Payment-Success?paymentID=${payment.razorpay_order_id}`)
+                            toast.success("Payment Successfull.");
+                            setTimeout(() => {
+                                toast.success("Thank You For Registering Your Community!");
+                            }, 2000);
+                        }
+                        else {
                             toast.error("Error: Payment Verification Failed!");
                         }
-                    },
-                    prefill: {
-                        name: name,
-                        email: email,
-                        contact: mobileNo,
-                    },
-                    theme: {
-                        color: "#bbf7d0"
+                    } catch {
+                        toast.error("Error: Payment Verification Failed!");
                     }
-                };
+                },
+                prefill: {
+                    name: name,
+                    email: email,
+                    contact: mobileNo,
+                },
+                theme: {
+                    color: "#bbf7d0"
+                }
+            };
 
-                const rzp = new window.Razorpay(options);
-                rzp.open();
-            }
-            else {
-                alert('Payment initiation failed');
-            }
+            const rzp = new window.Razorpay(options);
+            rzp.open();
+        }
+        else {
+            alert('Payment initiation failed');
+        }
         // }
         // catch (error) {
         //     console.log(error);
