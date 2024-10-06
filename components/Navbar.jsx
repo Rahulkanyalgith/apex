@@ -8,7 +8,7 @@ import { Sheet, SheetClose, SheetContent, SheetDescription, SheetTitle, SheetTri
 
 function Navbar() {
   return (
-    <div className="flex items-center justify-center w-full p-6 bg-white">
+    <div className="flex items-center justify-center w-full p-6">
       <div className="flex items-center justify-between w-full">
         <Link href="/">
           <Image src={Logo} quality={100} width={200} alt="Apex Mun" fetchPriority="high" priority={true} loading="eager" />

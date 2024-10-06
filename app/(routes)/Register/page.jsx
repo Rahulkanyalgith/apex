@@ -13,6 +13,7 @@ import {
 import { toast } from 'sonner';
 import Script from 'next/script';
 import { useRouter } from 'next/navigation';
+import { Loader2 } from 'lucide-react';
 
 
 function page() {
@@ -205,8 +206,8 @@ function page() {
                     <Input required={true} onChange={(e) => setMobileNo(e.target.value)} value={mobileNo} type={"tel"} minLength={10} maxLength={10} labelValue={"Mobile No*"} placeholder={"+91 00000 00000"} />
                     <Input required={true} onChange={(e) => setSchoolCollege(e.target.value)} value={schoolCollege} type={"text"} labelValue={"School/College*"} placeholder={"ABC College"} />
                     <Input required={true} onChange={(e) => setClassYear(e.target.value)} value={classYear} type={"text"} labelValue={"Class/Year*"} placeholder={"2nd Year"} />
-                    <Input required={true} onChange={(e) => setMunExperience(e.target.value)} value={munExperience} type={"text"} labelValue={"MUN Experience*"} placeholder={"No. of MUN's Done?"} />
-                    <Input required={true} onChange={(e) => setAge(e.target.value)} value={age} type={"text"} labelValue={"Age*"} placeholder={"18"} />
+                    <Input required={true} onChange={(e) => setMunExperience(e.target.value)} value={munExperience} type={"tel"} labelValue={"MUN Experience*"} placeholder={"No. of MUN's Done?"} />
+                    <Input required={true} onChange={(e) => setAge(e.target.value)} value={age} type={"tel"} labelValue={"Age*"} placeholder={"18"} />
 
                     <div className="flex flex-col gap-2">
                         <p className="text-sm font-medium">Committee*</p>
@@ -291,7 +292,9 @@ function page() {
                         </div>
                     </div>
 
-                    <button disabled={paymentProcessing} className="p-3 duration-300 bg-green-200 border-2 border-green-200 active:bg-green-200 active:border-green-200 hover:bg-white hover:border-green-200 rounded-b-xl">Pay Now</button>
+                    <button disabled={paymentProcessing} className="flex justify-center w-full p-3 duration-300 bg-green-200 border-2 border-green-200 active:bg-green-200 active:border-green-200 hover:bg-white disabled:bg-black disabled:border-black disabled:text-green-200 hover:border-green-200 rounded-b-xl">
+                        {!paymentProcessing ? "Pay Now" : <Loader2 className="animate-spin" />}
+                    </button>
                 </form>
             </div>
         </div>
