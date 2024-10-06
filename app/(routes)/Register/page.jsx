@@ -47,7 +47,7 @@ function page() {
             }
 
             const payment = await axios.post(`${process.env.NEXT_PUBLIC_URL}/api/Payment/CreateOrder`, {
-                committeeID
+                committeeID: committeeID
             });
 
             const encryptedData = payment.data.Response;
