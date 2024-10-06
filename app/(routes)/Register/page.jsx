@@ -39,7 +39,7 @@ function page() {
     const [isChecked, setIsChecked] = useState(false);
 
     const handlePayment = async () => {
-        setPaymentProcessing(true);
+        // setPaymentProcessing(true);
 
         // try {
         if (!process.env.NEXT_PUBLIC_SECRET_KEY) {
@@ -53,17 +53,19 @@ function page() {
         console.log(process.env.NEXT_PUBLIC_SECRET_KEY);
         console.log(process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID);
         const encryptedData = payment.data.Response;
+        console.log(encryptedData);
+        
         // const bytes = CryptoJS.AES.decrypt(encryptedData, process.env.NEXT_PUBLIC_SECRET_KEY);
         // const decryptedData = bytes.toString(CryptoJS.enc.Utf8);
         // const parsedData = JSON.parse(decryptedData);
         if (encryptedData.id) {
             const options = {
                 key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
-                amount: parsedData.amount,
-                currency: parsedData.currency,
+                amount: encryptedData.amount,
+                currency: encryptedData.currency,
                 name: 'Apex Mun',
                 description: 'Test Transaction',
-                order_id: parsedData.id,
+                order_id: encryptedData.id,
                 handler: async function (payment) {
                     try {
 
@@ -83,7 +85,7 @@ function page() {
                             razorpayOrderId: payment.razorpay_order_id,
                             razorpayPaymentId: payment.razorpay_payment_id,
                             razorpaySignature: payment.razorpay_signature,
-                            paymentAmount: parsedData.amount,
+                            paymentAmount: encryptedData.amount,
                         });
 
                         if (res.data.Verification) {
