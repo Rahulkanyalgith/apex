@@ -115,7 +115,8 @@ function page() {
                 alert('Payment initiation failed');
             }
         }
-        catch {
+        catch (error) {
+            console.log(error);
             toast("Error: While Initiating Payment!");
         }
         finally {
