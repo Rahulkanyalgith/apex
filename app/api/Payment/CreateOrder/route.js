@@ -25,13 +25,13 @@ export async function POST(req, res) {
             receipt: billId,
         });
 
-        // if (!process.env.SECRET_KEY) {
-        //     return NextResponse.json({ Response: "Server Error: Missing Encryption Key!" }, { status: 500 });
-        // }
+        if (!process.env.SECRET_KEY) {
+            return NextResponse.json({ Response: "Server Error: Missing Encryption Key!" }, { status: 500 });
+        }
 
-        // const encryptedData = CryptoJS.AES.encrypt(JSON.stringify(order), process.env.SECRET_KEY).toString();
+        const encryptedData = CryptoJS.AES.encrypt(JSON.stringify(order), process.env.SECRET_KEY).toString();
 
-        return NextResponse.json({ Response: order })
+        return NextResponse.json({ Response: encryptedData })
     } catch {
         return NextResponse.json({ Response: "Error While Creating Payment Order!" });
     }
