@@ -11,9 +11,7 @@ export async function POST(req, res) {
     try {
 
         const { committeeID } = await req.json();
-
         console.log(committeeID);
-
 
         const Committee = await prisma.committee.findUnique({
             where: {
@@ -21,8 +19,7 @@ export async function POST(req, res) {
             },
         });
 
-        console.log(committeeID);
-
+        console.log(committeeID, Committee.price);
 
         const billId = `bill_${Date.now()}_${Math.random().toString(36).substring(2, 15)}`;
         const order = await razorpay.orders.create({
