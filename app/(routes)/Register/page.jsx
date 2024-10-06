@@ -39,9 +39,8 @@ function page() {
     const [isChecked, setIsChecked] = useState(false);
 
     const handlePayment = async () => {
-        setPaymentProcessing(true);
+        // setPaymentProcessing(true);
 
-        try {
             if (!process.env.NEXT_PUBLIC_SECRET_KEY) {
                 toast("Server Error: Missing Encryption Key!");
             }
@@ -50,10 +49,13 @@ function page() {
                 committeeID
             });
 
-            const encryptedData = payment.data.Response;
-            const bytes = CryptoJS.AES.decrypt(encryptedData, process.env.NEXT_PUBLIC_SECRET_KEY);
-            const decryptedData = bytes.toString(CryptoJS.enc.Utf8);
-            const parsedData = JSON.parse(decryptedData);
+            console.log(payment.data.Response);
+            const parsedData = payment.data.Response;
+            console.log(parsedData);
+            // const encryptedData = payment.data.Response;
+            // const bytes = CryptoJS.AES.decrypt(encryptedData, process.env.NEXT_PUBLIC_SECRET_KEY);
+            // const decryptedData = bytes.toString(CryptoJS.enc.Utf8);
+            // const parsedData = JSON.parse(decryptedData);
             if (parsedData.id) {
                 const options = {
                     key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
@@ -118,28 +120,28 @@ function page() {
             else {
                 alert('Payment initiation failed');
             }
-        }
-        catch (error) {
-            console.log(error);
-            toast("Error: While Initiating Payment!");
-        }
-        finally {
-            setPaymentProcessing(false);
-            setcommitteeID("");
-            setPortfolioID("");
-            setPortfolioID1("");
-            setPortfolioID2("");
-            setPrice(0);
-            setName("");
-            setEmail("");
-            setMobileNo("");
-            setSchoolCollege("");
-            setClassYear("");
-            setMunExperience("");
-            setAge("");
-            setRef("");
-            setIsChecked(false);
-        }
+        // }
+        // catch (error) {
+        //     console.log(error);
+        //     toast("Error: While Initiating Payment!");
+        // }
+        // finally {
+        //     setPaymentProcessing(false);
+        //     setcommitteeID("");
+        //     setPortfolioID("");
+        //     setPortfolioID1("");
+        //     setPortfolioID2("");
+        //     setPrice(0);
+        //     setName("");
+        //     setEmail("");
+        //     setMobileNo("");
+        //     setSchoolCollege("");
+        //     setClassYear("");
+        //     setMunExperience("");
+        //     setAge("");
+        //     setRef("");
+        //     setIsChecked(false);
+        // }
     }
 
     const handleCheckboxChange = () => {
