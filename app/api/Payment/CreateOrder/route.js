@@ -31,7 +31,7 @@ export async function POST(req, res) {
 
         const encryptedData = CryptoJS.AES.encrypt(JSON.stringify(order), process.env.SECRET_KEY).toString();
 
-        return NextResponse.json({ Response: Committee })
+        return NextResponse.json({ Response: order })
     } catch {
         return NextResponse.json({ Response: "Error While Creating Payment Order!" });
     }
