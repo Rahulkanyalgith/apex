@@ -14,14 +14,13 @@ export async function POST(req, res) {
 
         const Committee = await prisma.committee.findUnique({
             where: {
-                totallyBooked: false,
                 id: committeeID
             },
         });
 
         const billId = `bill_${Date.now()}_${Math.random().toString(36).substring(2, 15)}`;
         const order = await razorpay.orders.create({
-            amount: (Committee.price + (Committee.price * 5 / 100) * 100),
+            amount: (Committee.price + (Committee.price * 5) / 100) * 100,
             currency: "INR",
             receipt: billId,
         });

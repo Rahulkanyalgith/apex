@@ -22,6 +22,8 @@ function page() {
     const [committeeData, setCommitteeData] = useState([]);
     const [committeeID, setcommitteeID] = useState("");
     const [portfolioID, setPortfolioID] = useState("");
+    const [portfolioID1, setPortfolioID1] = useState("");
+    const [portfolioID2, setPortfolioID2] = useState("");
     const [portfolioData, setPortfolioData] = useState([]);
     const [price, setPrice] = useState(0);
     const [paymentProcessing, setPaymentProcessing] = useState(false);
@@ -72,6 +74,8 @@ function page() {
                                 age: age,
                                 committeeID: committeeID,
                                 portfolioID: portfolioID,
+                                portfolioID1: portfolioID1,
+                                portfolioID2: portfolioID2,
                                 ref: ref,
                                 razorpayOrderId: payment.razorpay_order_id,
                                 razorpayPaymentId: payment.razorpay_payment_id,
@@ -117,6 +121,8 @@ function page() {
             setPaymentProcessing(false);
             setcommitteeID("");
             setPortfolioID("");
+            setPortfolioID1("");
+            setPortfolioID2("");
             setPrice(0);
             setName("");
             setEmail("");
@@ -168,7 +174,7 @@ function page() {
             const priceBytes = CryptoJS.AES.decrypt(encryptedPriceData, process.env.NEXT_PUBLIC_SECRET_KEY);
             const decryptedPriceData = priceBytes.toString(CryptoJS.enc.Utf8);
             const parsedPriceData = JSON.parse(decryptedPriceData);
-            setPrice(parsedPriceData.price + ((parsedPriceData.price * 5) / 100));
+            setPrice((parsedPriceData.price + (parsedPriceData.price * 5) / 100));
         } catch (error) {
             toast("Error: While Fetching & Decrypting Data!");
         }
@@ -185,10 +191,14 @@ function page() {
     }
 
     return (
-        <div className="flex flex-col items-center justify-center w-full gap-20 py-20">
+        <div className="flex flex-col items-center justify-center w-full gap-20 py-20 overflow-hidden">
             <Script src="https://checkout.razorpay.com/v1/checkout.js" />
-            <div className="flex flex-col justify-center w-1/2 gap-20">
-                <h1 className="text-6xl font-semibold">Register Form</h1>
+            <div className="flex flex-col justify-center w-3/4 gap-20">
+                <div className="leading-none tracking-tighter">
+                    <h1 className="text-[5rem] md:text-[7.5rem] lg:text-[9rem] font-black">Apex MUN'24</h1>
+                    <h1 className="text-[5rem] md:text-[7.5rem] lg:text-[9rem] font-black">Register</h1>
+                </div>
+
                 <form onSubmit={handleSubmit} className="flex flex-col w-full gap-6">
                     <Input required={true} onChange={(e) => setName(e.target.value)} value={name} className="rounded-t-xl" type={"text"} labelValue={"Full Name*"} placeholder={"Abc"} />
                     <Input required={true} onChange={(e) => setEmail(e.target.value)} value={email} type={"email"} labelValue={"Email ID*"} placeholder={"abc@company.com"} />
@@ -215,8 +225,40 @@ function page() {
                     </div>
 
                     <div className="flex flex-col gap-2">
-                        <p className="text-sm font-medium">Portfolio*</p>
+                        <p className="text-sm font-medium">Portfolio Reference 1*</p>
                         <Select required onValueChange={(id) => setPortfolioID(id)}>
+                            <SelectTrigger>
+                                <SelectValue placeholder="Select An Portfolio" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                {portfolioData.map((data, index) => (
+                                    <SelectItem key={index} value={data.id}>
+                                        {data.name}
+                                    </SelectItem>
+                                ))}
+                            </SelectContent>
+                        </Select>
+                    </div>
+
+                    <div className="flex flex-col gap-2">
+                        <p className="text-sm font-medium">Portfolio Reference 2*</p>
+                        <Select required onValueChange={(id) => setPortfolioID1(id)}>
+                            <SelectTrigger>
+                                <SelectValue placeholder="Select An Portfolio" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                {portfolioData.map((data, index) => (
+                                    <SelectItem key={index} value={data.id}>
+                                        {data.name}
+                                    </SelectItem>
+                                ))}
+                            </SelectContent>
+                        </Select>
+                    </div>
+
+                    <div className="flex flex-col gap-2">
+                        <p className="text-sm font-medium">Portfolio Reference 3*</p>
+                        <Select required onValueChange={(id) => setPortfolioID2(id)}>
                             <SelectTrigger>
                                 <SelectValue placeholder="Select An Portfolio" />
                             </SelectTrigger>

@@ -2,55 +2,19 @@ import { NextResponse } from "next/server";
 import prisma from "@/lib/prismadb"
 import CryptoJS from "crypto-js";
 
-export async function PUT(req, { params }) {
-    const { id } = params;
-
-    const { portfolioId, booked } = await req.json();
-
-    try {
-
-        await prisma.portfolio.update({
-            where: {
-                id: portfolioId,
-                committeeId: id
-            },
-            data: {
-                booked: booked
-            }
-        })
-
-        if (portfolio.every(data => data.booked === true)) {
-            await prisma.committee.update({
-                where: {
-                    id: id
-                },
-                data: {
-                    totallyBooked: true
-                }
-            })
-        }
-
-        return NextResponse.json({ Response: "Committee Updation Successfull!" })
-
-    } catch (error) {
-        return NextResponse.json({ Response: "Committee Fetching Unsuccessfull!" })
-    }
-}
-
 export async function GET(req, { params }) {
 
     const { id } = params;
+    
     try {
         const portfolio = await prisma.portfolio.findMany({
             where: {
-                booked: false,
                 committeeId: id
             },
         });
 
         const price = await prisma.committee.findUnique({
             where: {
-                totallyBooked: false,
                 id: id
             },
         });

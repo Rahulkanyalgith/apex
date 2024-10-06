@@ -43,18 +43,18 @@ function page() {
 
     return (
         <div className="flex items-center justify-center w-full py-28 md:py-40">
-            <div className="flex flex-col items-start w-11/12 gap-20 md:w-3/4 md:flex-row">
+            <div className="flex flex-col items-start w-11/12 gap-20 xl:w-3/4 xl:flex-row">
                 <div className="flex flex-col w-full gap-10">
                     <div className="flex flex-col gap-4">
-                        <p>WE'D LOVE TO HEAR FROM YOU</p>
-                        <h1 className="text-6xl font-semibold">Contact Us</h1>
+                        <p className="font-mono md:text-lg">WE'D LOVE TO HEAR FROM YOU</p>
+                        <h1 className="text-6xl font-black leading-none md:text-7xl">Contact Us</h1>
                         <div className="h-1 bg-black rounded-full w-28"></div>
-                        <p>Get In Touch With Us</p>
+                        <p className="font-mono md:text-lg">Get In Touch With Us</p>
                     </div>
                     <div className="flex flex-col gap-4">
-                        <Link href="/" className="flex items-center gap-4"><MapPinCheckIcon /> 🇮🇳 Jankapuri, New Delhi</Link>
-                        <Link href="/" className="flex items-center gap-4"><PhoneCall /> +91 00000 00000</Link>
-                        <Link href="/" className="flex items-center gap-4"><MailCheck /> apexmun2024@gmail.com</Link>
+                        <Link href="/" className="flex items-center gap-4 font-mono font-semibold md:text-xl"><MapPinCheckIcon /> 🇮🇳 Jankapuri, New Delhi</Link>
+                        <Link href="/" className="flex items-center gap-4 font-mono font-semibold md:text-xl"><PhoneCall /> +91 72997 29975</Link>
+                        <Link href="/" className="flex items-center gap-4 font-mono font-semibold md:text-xl"><MailCheck /> apexmun2024@gmail.com</Link>
                     </div>
                 </div>
                 <form onSubmit={handleSubmit} className="flex flex-col w-full gap-4">

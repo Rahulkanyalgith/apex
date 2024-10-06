@@ -22,7 +22,6 @@ model Committee {
   name          String      @unique
   price         Int         @default(0)
   portfolio     Portfolio[]
-  totallyBooked Boolean     @default(false)
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
 }
@@ -30,7 +29,6 @@ model Committee {
 model Portfolio {
   id          String     @id @default(auto()) @map("_id") @db.ObjectId
   name        String
-  booked      Boolean    @default(false)
   Committee   Committee? @relation(fields: [committeeId], references: [id])
   committeeId String?    @db.ObjectId
   createdAt   DateTime   @default(now())
@@ -46,10 +44,10 @@ model Register {
   classYear                String
   munExperience            String
   age                      String
-  committeeID              String
   committeeName            String
-  portfolioID              String
   portfolioName            String
+  portfolioName1           String
+  portfolioName2           String
   ref                      String
   paymentMethod            String
   cardPayment              String?

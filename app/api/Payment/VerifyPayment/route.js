@@ -9,30 +9,16 @@ const razorpay = new Razorpay({
 
 export async function POST(req, res) {
     try {
-        const { name, email, mobileNo, schoolCollege, classYear, munExperience, age, committeeID, portfolioID, ref, razorpayOrderId, razorpayPaymentId, razorpaySignature } = await req.json();
+        const { name, email, mobileNo, schoolCollege, classYear, munExperience, age, committeeID, portfolioID, portfolioID1, portfolioID2, ref, razorpayOrderId, razorpayPaymentId, razorpaySignature } = await req.json();
 
         const paymentConfirmation = await razorpay.payments.fetch(razorpayPaymentId);
 
         if (paymentConfirmation.status === "captured" && paymentConfirmation.order_id === razorpayOrderId) {
 
-            await prisma.portfolio.update({
-                where: { id: portfolioID },
-                data: { booked: true }
-            });
-
-            const portfolios = await prisma.portfolio.findMany({
-                where: { committeeId: committeeID },
-            });
-
-            if (portfolios.every(data => data.booked)) {
-                await prisma.committee.update({
-                    where: { id: committeeID },
-                    data: { totallyBooked: true }
-                });
-            }
-
             const committee = await prisma.committee.findUnique({ where: { id: committeeID } });
             const portfolio = await prisma.portfolio.findUnique({ where: { id: portfolioID } });
+            const portfolio1 = await prisma.portfolio.findUnique({ where: { id: portfolioID1 } });
+            const portfolio2 = await prisma.portfolio.findUnique({ where: { id: portfolioID2 } });
 
             await prisma.register.create({
                 data: {
@@ -43,10 +29,10 @@ export async function POST(req, res) {
                     classYear,
                     munExperience,
                     age,
-                    committeeID: committeeID,
                     committeeName: committee.name,
-                    portfolioID: portfolioID,
                     portfolioName: portfolio.name,
+                    portfolioName1: portfolio1.name,
+                    portfolioName2: portfolio2.name,
                     ref,
                     paymentMethod: paymentConfirmation.method,
                     cardPayment: paymentConfirmation.card_id,

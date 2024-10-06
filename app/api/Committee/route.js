@@ -40,18 +40,7 @@ export async function POST(req, res) {
 
 export async function GET(req, res) {
     try {
-        const committees = await prisma.committee.findMany({
-            where: {
-                totallyBooked: false,
-            },
-            include: {
-                portfolio: {
-                    where: {
-                        booked: false,
-                    },
-                },
-            }
-        });
+        const committees = await prisma.committee.findMany();
 
         if (!process.env.SECRET_KEY) {
             return NextResponse.json({ Response: "Server Error: Missing Encryption Key!" }, { status: 500 });
