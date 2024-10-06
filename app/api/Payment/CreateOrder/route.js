@@ -29,9 +29,9 @@ export async function POST(req, res) {
             return NextResponse.json({ Response: "Server Error: Missing Encryption Key!" }, { status: 500 });
         }
 
-        const encryptedData = CryptoJS.AES.encrypt(JSON.stringify(order), process.env.SECRET_KEY).toString();
+        // const encryptedData = CryptoJS.AES.encrypt(JSON.stringify(order), process.env.SECRET_KEY).toString();
 
-        return NextResponse.json({ Response: encryptedData })
+        return NextResponse.json({ Response: order })
     } catch {
         return NextResponse.json({ Response: "Error While Creating Payment Order!" });
     }

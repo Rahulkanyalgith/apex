@@ -53,10 +53,10 @@ function page() {
         console.log(process.env.NEXT_PUBLIC_SECRET_KEY);
         console.log(process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID);
         const encryptedData = payment.data.Response;
-        const bytes = CryptoJS.AES.decrypt(encryptedData, process.env.NEXT_PUBLIC_SECRET_KEY);
-        const decryptedData = bytes.toString(CryptoJS.enc.Utf8);
-        const parsedData = JSON.parse(decryptedData);
-        if (parsedData.id) {
+        // const bytes = CryptoJS.AES.decrypt(encryptedData, process.env.NEXT_PUBLIC_SECRET_KEY);
+        // const decryptedData = bytes.toString(CryptoJS.enc.Utf8);
+        // const parsedData = JSON.parse(decryptedData);
+        if (encryptedData.id) {
             const options = {
                 key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
                 amount: parsedData.amount,
