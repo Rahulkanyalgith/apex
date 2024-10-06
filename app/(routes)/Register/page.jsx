@@ -41,7 +41,7 @@ function page() {
     const handlePayment = async () => {
         setPaymentProcessing(true);
 
-        try {
+        // try {
             if (!process.env.NEXT_PUBLIC_SECRET_KEY) {
                 toast("Server Error: Missing Encryption Key!");
             }
@@ -118,28 +118,28 @@ function page() {
             else {
                 alert('Payment initiation failed');
             }
-        }
-        catch (error) {
-            console.log(error);
-            toast("Error: While Initiating Payment!");
-        }
-        finally {
-            setPaymentProcessing(false);
-            setcommitteeID("");
-            setPortfolioID("");
-            setPortfolioID1("");
-            setPortfolioID2("");
-            setPrice(0);
-            setName("");
-            setEmail("");
-            setMobileNo("");
-            setSchoolCollege("");
-            setClassYear("");
-            setMunExperience("");
-            setAge("");
-            setRef("");
-            setIsChecked(false);
-        }
+        // }
+        // catch (error) {
+        //     console.log(error);
+        //     toast("Error: While Initiating Payment!");
+        // }
+        // finally {
+        //     setPaymentProcessing(false);
+        //     setcommitteeID("");
+        //     setPortfolioID("");
+        //     setPortfolioID1("");
+        //     setPortfolioID2("");
+        //     setPrice(0);
+        //     setName("");
+        //     setEmail("");
+        //     setMobileNo("");
+        //     setSchoolCollege("");
+        //     setClassYear("");
+        //     setMunExperience("");
+        //     setAge("");
+        //     setRef("");
+        //     setIsChecked(false);
+        // }
     }
 
     const handleCheckboxChange = () => {
