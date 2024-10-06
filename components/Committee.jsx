@@ -16,8 +16,8 @@ function Committee() {
                 <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 2xl:grid-cols-3 w-fit">
                     {HomeCommittee.map((data, index) => (
                         <div className="relative flex flex-col h-full gap-10 p-8 duration-300 border hover:border-green-500 hover:scale-95 rounded-xl" key={index}>
-                            <Image src={data.image} quality={100} alt={data.title} fetchPriority="high" priority={true} loading="eager" className="rounded-xl" />
                             <BorderBeam size={250} duration={12} delay={9} />
+                            <Image src={data.image} quality={100} alt={data.title} fetchPriority="high" priority={true} loading="eager" className="rounded-xl" />
 
                             <div className="flex flex-col gap-2">
                                 <h1 className="text-[2rem] font-black">{data.title}</h1>

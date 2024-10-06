@@ -19,12 +19,10 @@ function Team() {
             <div className="w-[90%] lg:w-3/4 overflow-hidden">
                 <Marquee loop={0} delay={0} speed={20} gradient={true} gradientColor={"white"} gradientWidth={100}>
                     {TemaData.map((data, index) => (
-                        <div className="relative flex flex-col gap-10 p-5 ml-10 overflow-hidden duration-300 border md:p-8 h-fit rounded-xl w-fit" key={index}>
+                        <div className="relative flex flex-col h-full gap-6 p-6 ml-10 overflow-hidden duration-300 border rounded-xl w-fit" key={index}>
                             <BorderBeam size={250} duration={12} delay={9} />
-                            <Image src={data.image} alt={data.name} fetchPriority="high" priority={true} loading="eager" quality={100} width={300} className="rounded-xl" />
-                            <div className="flex flex-col gap-2 leading-none">
-                                <h1 className="text-[1rem] md:text-[2rem] font-black">{data.name}</h1>
-                            </div>
+                            <Image src={data.image} alt={data.name} fetchPriority="high" priority={true} loading="eager" quality={100} className="object-cover w-[300px] h-[340px] rounded-xl" />
+                            <h1 className="text-[2rem] font-black">{data.name}</h1>
                         </div>
                     ))}
                 </Marquee>
