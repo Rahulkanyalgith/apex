@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 
 function Page() {
   const router = useRouter();
-  const initialTime = 7000;
+  const initialTime = 10000;
   const [countdown, setCountdown] = useState(initialTime / 1000);
 
   useEffect(() => {

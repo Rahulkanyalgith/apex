@@ -88,7 +88,7 @@ function page() {
                             });
 
                             if (res.data.Verification) {
-                                router.replace(`/Payment-Success?paymentID=${payment.razorpay_order_id}`)
+                                router.push(`/Payment-Success?paymentID=${payment.razorpay_order_id}`)
                                 toast.success("Payment Successfull.");
                                 setTimeout(() => {
                                     toast.success("Thank You For Registering Your Community!");
@@ -103,7 +103,7 @@ function page() {
                     },
                     modal: {
                         ondismiss: function () {
-                            router.replace(`/Payment-Failed?paymentID=${parsedData.id}`)
+                            router.push(`/Payment-Failed?paymentID=${parsedData.id}`)
                             toast('Payment Gateway Closed!');
                             setTimeout(() => {
                                 toast.success("Payment Failed!");
