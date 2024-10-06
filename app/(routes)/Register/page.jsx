@@ -101,6 +101,20 @@ function page() {
                             toast.error("Error: Payment Verification Failed!");
                         }
                     },
+                    modal: {
+                        ondismiss: function () {
+                            router.replace(`/Payment-Failed?paymentID=${parsedData.id}`)
+                            toast('Payment Gateway Closed!');
+                            setTimeout(() => {
+                                toast.success("Payment Failed!");
+                            }, 2000);
+                        }
+                    },
+                    method: {
+                        card: true,
+                        netbanking: true,
+                        upi: true,
+                    },
                     prefill: {
                         name: name,
                         email: email,

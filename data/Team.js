@@ -15,7 +15,7 @@ export const TemaData = [
     },
     {
         image: Mayank,
-        name: "Moksha Kohli",
+        name: "Sangwan Mayank",
     },
     {
         image: Moksha,

@@ -33,9 +33,8 @@ function Page() {
   return (
     <div className="flex flex-col items-center justify-center w-full min-h-screen gap-10">
       <p>Redirecting In {countdown} Seconds...</p>
-      <video src="/Successful Payment.mp4" autoPlay muted playsInline width={300} loop></video>
-      <h1 className="text-6xl font-black">Payment Successful!</h1>
-      <Link href="/" className="p-4 text-lg font-medium bg-green-200 rounded-xl">Download Invoice</Link>
+      <video src="/Payment Failed.mp4" autoPlay muted playsInline width={300} loop></video>
+      <h1 className="text-4xl font-black md:text-6xl">Payment Failed!</h1>
     </div>
   );
 }
