@@ -193,7 +193,7 @@ function page() {
     return (
         <div className="flex flex-col items-center justify-center w-full gap-20 py-20 overflow-hidden">
             <Script src="https://checkout.razorpay.com/v1/checkout.js" />
-            <div className="flex flex-col justify-center w-3/4 gap-20">
+            <div className="flex flex-col justify-center w-11/12 gap-20 md:w-3/4">
                 <div className="leading-none tracking-tighter">
                     <h1 className="text-[5rem] md:text-[7.5rem] lg:text-[9rem] font-black">Apex MUN'24</h1>
                     <h1 className="text-[5rem] md:text-[7.5rem] lg:text-[9rem] font-black">Register</h1>

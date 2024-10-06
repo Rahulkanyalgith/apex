@@ -51,7 +51,7 @@ const SheetContent = React.forwardRef(({ side = "left", className, children, ...
       {children}
       <SheetPrimitive.Close
         className="absolute right-8 top-14">
-        <X size={32}/>
+        <X />
         <span className="sr-only">Close</span>
       </SheetPrimitive.Close>
     </SheetPrimitive.Content>

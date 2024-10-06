@@ -17,7 +17,7 @@ function Navbar() {
         <div className="flex items-center gap-4 shrink-0 lg:hidden">
           <Sheet>
             <SheetTrigger asChild>
-              <MenuIcon size={20} />
+              <MenuIcon />
             </SheetTrigger>
             <SheetContent side="left">
               <SheetTitle></SheetTitle>
@@ -27,6 +27,20 @@ function Navbar() {
                   <Image src={Logo} quality={100} width={200} alt="Apex Mun" fetchPriority="high" priority={true} loading="eager" />
                 </Link>
               </SheetClose>
+              <div className="flex flex-col items-center justify-center gap-4 h-96">
+                <SheetClose asChild>
+                  <Link className="text-xl font-medium duration-300 hover:text-green-500" href="/">Home</Link>
+                </SheetClose>
+                <SheetClose asChild>
+                  <Link className="text-xl font-medium duration-300 hover:text-green-500" href="/Committee">Committees</Link>
+                </SheetClose>
+                <SheetClose asChild>
+                  <Link className="text-xl font-medium duration-300 hover:text-green-500" href="/ReachUs">Reach Us</Link>
+                </SheetClose>
+                <SheetClose asChild>
+                  <Link className="text-xl font-medium duration-300 hover:text-green-500" href="/Register">Register</Link>
+                </SheetClose>
+              </div>
             </SheetContent>
           </Sheet>
         </div >
