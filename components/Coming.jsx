@@ -1,6 +1,7 @@
 import React from 'react'
 
 function Coming() {
+
   return (
     <div className="flex flex-col items-center justify-center gap-10 py-20 text-white bg-black">
       <div className="flex flex-col items-center gap-6">

@@ -3,6 +3,7 @@ import Aviral from "@/public/Team/Aviral.jpeg";
 import Moksha from "@/public/Team/Mokshu.jpg";
 import Mayank from "@/public/Team/Mayank.jpeg";
 import Anishka from "@/public/Team/Anshika.jpeg";
+import Kashvi from "@/public/Team/Kashvi.jpeg";
 
 export const TemaData = [
     {
@@ -24,5 +25,9 @@ export const TemaData = [
     {
         image: Anishka,
         name: "Anshika Jain",
+    },
+    {
+        image: Kashvi,
+        name: "Kashvi Arora",
     },
 ];
