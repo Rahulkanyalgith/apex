@@ -216,6 +216,12 @@ export const metadata = {
     description: "Apex Model United Nations (MUN) is a prestigious conference designed to encourage debate and discussion on pressing global issues. Bringing together students from schools and colleges across the Delhi Circuit, the event simulates the workings of the United Nations, providing a dynamic platform for youth to hone essential skills such as diplomacy, public speaking, negotiation, and consensus-building. This initiative within the Delhi MUN circuit aims to empower young minds, equipping them with the tools to become thoughtful leaders and effective communicators.",
     url: "https://apexmun.vercel.app",
     images: [
+      "https://apexmun.vercel.app/favicon.ico",
+      "https://apexmun.vercel.app/android-chrome-192x192.png",
+      "https://apexmun.vercel.app/android-chrome-512x512.png",
+      "https://apexmun.vercel.app/apple-touch-icon.png",
+      "https://apexmun.vercel.app/favicon-16x16.png",
+      "https://apexmun.vercel.app/favicon-32x32.png",
       "https://apexmun.vercel.app/Logo.jpeg",
       "https://apexmun.vercel.app/LogoBlack.png",
       "https://apexmun.vercel.app/LogoWhite.png",
@@ -244,6 +250,12 @@ export const metadata = {
     description: "Apex Model United Nations (MUN) is a prestigious conference designed to encourage debate and discussion on pressing global issues. Bringing together students from schools and colleges across the Delhi Circuit, the event simulates the workings of the United Nations, providing a dynamic platform for youth to hone essential skills such as diplomacy, public speaking, negotiation, and consensus-building. This initiative within the Delhi MUN circuit aims to empower young minds, equipping them with the tools to become thoughtful leaders and effective communicators.",
     url: "https://apexmun.vercel.app",
     images: [
+      "https://apexmun.vercel.app/favicon.ico",
+      "https://apexmun.vercel.app/android-chrome-192x192.png",
+      "https://apexmun.vercel.app/android-chrome-512x512.png",
+      "https://apexmun.vercel.app/apple-touch-icon.png",
+      "https://apexmun.vercel.app/favicon-16x16.png",
+      "https://apexmun.vercel.app/favicon-32x32.png",
       "https://apexmun.vercel.app/Logo.jpeg",
       "https://apexmun.vercel.app/LogoBlack.png",
       "https://apexmun.vercel.app/LogoWhite.png",
@@ -274,6 +286,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+        <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
