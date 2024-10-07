@@ -21,7 +21,7 @@ export const metadata = {
   copyright: "Copyright © 2024 · All Rights Reserved",
   title: {
     template: '%s | Apex Mun',
-    title: "Shaping Tomorrow's Leaders | Apex Mun",
+    default: "Shaping Tomorrow's Leaders | Apex Mun",
   },
   keywords: [
     "Apex MUN",
