@@ -274,8 +274,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" href="/apple-icon.png" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="apple-touch-icon" href="/apple-icon.png" sizes="any" />
       </head>
       <body className={`${gilroy.variable} font-Gilroy flex flex-col min-h-screen`}>
 
