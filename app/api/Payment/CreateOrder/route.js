@@ -10,8 +10,11 @@ const razorpay = new Razorpay({
 
 export async function POST(req, res) {
     try {
+        const { committeeID, couponData } = await req.json();
 
-        const { committeeID } = await req.json();
+        if (!committeeID) {
+            return NextResponse.json({ Response: "Invalid Committee ID!" }, { status: 400 });
+        }
 
         const Committee = await prisma.committee.findUnique({
             where: {
@@ -19,21 +22,33 @@ export async function POST(req, res) {
             },
         });
 
+        if (!Committee) {
+            return NextResponse.json({ Response: "Committee Not Found!" }, { status: 404 });
+        }
+
         const billId = `bill_${Date.now()}_${Math.random().toString(36).substring(2, 15)}`;
-        const order = await razorpay.orders.create({
-            amount: (Committee.price + (Committee.price * 5) / 100) * 100,
-            currency: "INR",
-            receipt: billId,
-        });
 
         if (!process.env.SECRET_KEY) {
             return NextResponse.json({ Response: "Server Error: Missing Encryption Key!" }, { status: 500 });
         }
 
-        const encryptedData = CryptoJS.AES.encrypt(JSON.stringify(order), process.env.SECRET_KEY).toString();
+        let amount = Committee.price * 100;
 
-        return NextResponse.json({ Response: encryptedData })
+        if (couponData) {
+            const discountPercentage = Math.min(Math.max(couponData.percentage, 0), 100);
+            amount = (Committee.price - (Committee.price * discountPercentage / 100)) * 100;
+        }
+
+        const order = await razorpay.orders.create({
+            amount: amount,
+            currency: "INR",
+            receipt: billId,
+        });
+
+        const encryptedData = CryptoJS.AES.encrypt(JSON.stringify(order), process.env.SECRET_KEY).toString();
+        return NextResponse.json({ Response: encryptedData });
+
     } catch {
-        return NextResponse.json({ Response: "Error While Creating Payment Order!" });
+        return NextResponse.json({ Response: "Error While Creating Payment Order!" }, { status: 500 });
     }
 }

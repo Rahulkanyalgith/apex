@@ -31,10 +31,13 @@ function Page() {
   }, [router, initialTime]);
 
   return (
-    <div className="flex flex-col items-center justify-center w-full min-h-screen gap-10">
-      <p>Redirecting In {countdown} Seconds...</p>
-      <video src="/Payment Failed.mp4" autoPlay muted playsInline width={300} loop></video>
-      <h1 className="text-4xl font-black md:text-6xl">Payment Failed!</h1>
+    <div className="flex flex-col items-center justify-center w-full min-h-screen gap-10 p-10 bg-gradient-to-b from-white via-red-100 to-white">
+      <video src="/Payment Failed.mp4" autoPlay muted playsInline width={300} loop className="shadow-lg rounded-xl" />
+      <h1 className="text-4xl font-black text-red-600 md:text-6xl">Payment Failed!</h1>
+      <p className="text-lg font-medium text-gray-800">Redirecting in {countdown} seconds...</p>
+      <Link href="/" className="px-6 py-3 mt-4 text-lg font-semibold text-white transition duration-300 bg-red-600 rounded-md hover:bg-red-700">
+        Go to Home
+      </Link>
     </div>
   );
 }

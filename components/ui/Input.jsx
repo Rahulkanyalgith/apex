@@ -1,22 +1,19 @@
-export const Input = ({ labelValue, minLength, maxLength, type, placeholder, value, className, onChange, disabled, required, name, checked, list, ...props }) => {
-    return (
-        <div className="flex flex-col gap-2">
-            <label htmlFor={labelValue} className="text-sm font-medium text-black">{labelValue}</label>
-            <input
-                name={name}
-                list={list}
-                minLength={minLength}
-                maxLength={maxLength}
-                id={labelValue}
-                type={type}
-                placeholder={placeholder}
-                value={value}
-                className={`border border-black focus:outline-none p-2 md:p-3 lg:w-full bg-transparent w-full ${className}`}
-                onChange={onChange}
-                required={required}
-                disabled={disabled}
-                checked={checked}
-            />
-        </div>
-    )
-}
+import * as React from "react"
+
+import { cn } from "@/lib/utils"
+
+const Input = React.forwardRef(({ className, type, ...props }, ref) => {
+  return (
+    (<input
+      type={type}
+      className={cn(
+        "flex w-full rounded-md border border-[#dddddd] p-3 lg:w-full bg-transparent placeholder:text-neutral-500 focus:border-black focus:outline-none disabled:cursor-not-allowed disabled:opacity-50",
+        className
+      )}
+      ref={ref}
+      {...props} />)
+  );
+})
+Input.displayName = "Input"
+
+export { Input }

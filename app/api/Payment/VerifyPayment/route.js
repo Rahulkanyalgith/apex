@@ -9,55 +9,83 @@ const razorpay = new Razorpay({
 
 export async function POST(req, res) {
     try {
-        const { name, email, mobileNo, schoolCollege, classYear, munExperience, age, committeeID, portfolioID, portfolioID1, portfolioID2, ref, razorpayOrderId, razorpayPaymentId, razorpaySignature } = await req.json();
+        const { formData, razorpayOrderId, razorpayPaymentId, razorpaySignature } = await req.json();
 
         const paymentConfirmation = await razorpay.payments.fetch(razorpayPaymentId);
 
         if (paymentConfirmation.status === "captured" && paymentConfirmation.order_id === razorpayOrderId) {
 
-            const committee = await prisma.committee.findUnique({ where: { id: committeeID } });
-            const portfolio = await prisma.portfolio.findUnique({ where: { id: portfolioID } });
-            const portfolio1 = await prisma.portfolio.findUnique({ where: { id: portfolioID1 } });
-            const portfolio2 = await prisma.portfolio.findUnique({ where: { id: portfolioID2 } });
+            const [committee, portfolio, portfolio1, portfolio2] = await Promise.all([
+                prisma.committee.findUnique({ where: { id: formData.committee } }),
+                prisma.portfolio.findUnique({ where: { id: formData.portfolioRef1 } }),
+                prisma.portfolio.findUnique({ where: { id: formData.portfolioRef2 } }),
+                prisma.portfolio.findUnique({ where: { id: formData.portfolioRef3 } })
+            ]);
 
-            await prisma.register.create({
-                data: {
-                    name,
-                    email,
-                    mobileNo,
-                    schoolCollege,
-                    classYear,
-                    munExperience,
-                    age,
-                    committeeName: committee.name,
-                    portfolioName: portfolio.name,
-                    portfolioName1: portfolio1.name,
-                    portfolioName2: portfolio2.name,
-                    ref,
-                    paymentMethod: paymentConfirmation.method,
-                    cardPayment: paymentConfirmation.card_id,
-                    cardLast4No: paymentConfirmation.card?.last4,
-                    cardNetwork: paymentConfirmation.card?.network,
-                    cardType: paymentConfirmation.card?.type,
-                    cardName: paymentConfirmation.card?.name,
-                    bankPayment: paymentConfirmation.bank,
-                    walletPayment: paymentConfirmation.wallet,
-                    vpa: paymentConfirmation.vpa,
-                    razorpayUpiTranscationId: paymentConfirmation.acquirer_data?.upi_transaction_id,
-                    razorpayBankranscationId: paymentConfirmation.acquirer_data?.bank_transaction_id,
-                    razorpayOrderId: razorpayOrderId,
-                    razorpayPaymentId: razorpayPaymentId,
-                    razorpaySignature: razorpaySignature,
-                    paymentAmount: paymentConfirmation.amount,
-                    paymentStatus: "Payment Successful!"
+            let registrationData = {
+                name: formData.name,
+                email: formData.email,
+                mobileNo: formData.mobileNo,
+                institutionName: formData.institutionName,
+                classYear: formData.classYear,
+                munExperience: formData.munExperience,
+                age: formData.age,
+                committeeName: committee.name,
+                portfolioRef1: portfolio.name,
+                portfolioRef2: portfolio1.name,
+                portfolioRef3: portfolio2.name,
+                ref: formData.ref,
+                paymentMethod: paymentConfirmation.method,
+                cardDetails: {
+                    create: {
+                        paymentId: paymentConfirmation.card_id,
+                        last4: paymentConfirmation.card?.last4,
+                        network: paymentConfirmation.card?.network,
+                        type: paymentConfirmation.card?.type,
+                        cardholder: paymentConfirmation.card?.name,
+                    }
+                },
+                bankPaymentDetails: {
+                    create: {
+                        transactionId: paymentConfirmation.bank
+                    }
+                },
+                walletPaymentDetails: {
+                    create: {
+                        transactionId: paymentConfirmation.wallet,
+                    }
+                },
+                UpiPaymentDetails: {
+                    create: {
+                        transactionId: paymentConfirmation.acquirer_data?.upi_transaction_id,
+                        vpa: paymentConfirmation.vpa
+                    }
+                },
+                razorpayOrderId: razorpayOrderId,
+                razorpayPaymentId: razorpayPaymentId,
+                razorpaySignature: razorpaySignature,
+                paymentAmount: paymentConfirmation.amount,
+                paymentStatus: "Payment Successful!"
+            };
+
+            if (formData.couponCode) {
+                const coupon = await prisma.coupon.findUnique({ where: { code: formData.couponCode, committeeId: formData.committee } });
+                if (coupon) {
+                    const discountedPrice = (committee.price - (committee.price * coupon.percentage / 100)) * 100;
+                    registrationData.couponCode = coupon.code;
+                    registrationData.couponPercentage = coupon.percentage;
+                    registrationData.couponAmount = discountedPrice;
                 }
-            });
+            }
+
+            await prisma.register.create({ data: registrationData });
 
             return NextResponse.json({ Verification: true, Response: "Payment Verification Successful!" });
         } else {
             return NextResponse.json({ Verification: false, Response: "Payment Verification Failed!" });
         }
     } catch (error) {
+        console.error("Error while verifying payment:", error);
         return NextResponse.json({ Verification: false, Response: "Error While Verifying Payment Order!" });
     }
 }

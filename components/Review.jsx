@@ -7,7 +7,7 @@ function Review() {
     const year = new Date().getFullYear();
 
     return (
-        <div className="flex items-center justify-center w-full py-40">
+        <div className="flex items-center justify-center w-full py-40 bg-gradient-to-b to-white via-green-50 from-white">
             <div className="flex flex-col justify-center w-11/12 gap-20">
                 <div className="flex flex-col items-center gap-6 leading-none">
                     <p className="text-2xl">TESTIMONIALS</p>

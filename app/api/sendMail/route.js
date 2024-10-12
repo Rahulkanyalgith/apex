@@ -7,7 +7,7 @@ export async function POST(req) {
     const year = new Date().getFullYear();
 
     try {
-        const { name, email, mobileNo, message } = await req.json();
+        const { name, email, mobileNo, bodyMessage } = await req.json();
 
         const transport = nodemailer.createTransport({
             service: "gmail",
@@ -68,14 +68,14 @@ export async function POST(req) {
         <body>
             <div class="content">
                 <div class="container">
-                    <img src="https://apexmun.vercel.app/Logo.png" width="400" alt="Apex Mun - 2024" fetchPriority="high" />
+                    <img src="https://apexmun.vercel.app/Logo.png" width="400" alt="Apex Mun - 2024" fetchPriority="high" loading="eager"/>
                     <h1 class="heading">Apex Mun - ${year}</h1>
                 </div>
                 <div class="info-container">
                     <p><strong>Full Name :</strong>${name}</p>
                     <p><strong>Email ID :</strong>${email}</p>
                     <p><strong>Mobile No :</strong>${mobileNo}</p>
-                    <p><strong>Message :</strong>${message}</p>
+                    <p><strong>Message :</strong>${bodyMessage}</p>
                 </div>
                  <div class="footer">
                      <p>Copyright © ${year} · All Rights Reserved</p>
@@ -103,12 +103,12 @@ export async function POST(req) {
                 name,
                 email,
                 mobileNo,
-                message
+                message: bodyMessage
             }
         });
 
         return NextResponse.json({ message: "Email Sent Successfully!" }, { status: 200 });
-    } catch (error) {
+    } catch {
         return NextResponse.json({ message: "Email Sent Unsuccessfully!" }, { status: 500 });
     }
 }

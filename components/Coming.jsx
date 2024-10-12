@@ -3,7 +3,7 @@ import React from 'react'
 function Coming() {
 
   return (
-    <div className="flex flex-col items-center justify-center gap-10 py-20 text-white bg-black">
+    <div className="flex flex-col items-center justify-center gap-10 py-20 text-gray-200 bg-black">
       <div className="flex flex-col items-center gap-6">
         <h1 className="text-3xl font-black lg:text-6xl">COMING <span className="text-amber-400">THIS NOVEMBER</span></h1>
         <div className="h-1 border-b-4 border-white rounded-full w-60"></div>

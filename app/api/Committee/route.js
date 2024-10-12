@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import CryptoJS from "crypto-js";
 
 export async function POST(req, res) {
-    const { name, price, portfolio } = await req.json();
+    const { name, price, portfolios, coupons } = await req.json();
 
     try {
         const existingCommittee = await prisma.committee.findUnique({
@@ -11,6 +11,21 @@ export async function POST(req, res) {
                 name: name,
             },
         });
+
+        const existingCoupon = await prisma.coupon.findMany({
+            select: {
+                code: true
+            }
+        });
+
+        const existingCouponCodes = existingCoupon.map(data => data.code);
+
+        const duplicateCoupons = coupons.filter(data => existingCouponCodes.includes(data.code));
+
+        if (duplicateCoupons.length > 0) {
+            const duplicateCodes = duplicateCoupons.map(coupon => coupon.code).join(", ");
+            return NextResponse.json({ Response: `These Coupon Codes ${duplicateCodes} Already Exist!` }, { status: 400 });
+        }
 
         if (existingCommittee) {
             return NextResponse.json({ Response: "Committee Already Exists!" }, { status: 400 });
@@ -20,21 +35,27 @@ export async function POST(req, res) {
             data: {
                 name: name,
                 price: price,
-                portfolio: {
+                portfolios: {
                     createMany: {
-                        data: portfolio,
+                        data: portfolios,
+                    }
+                },
+                coupons: {
+                    createMany: {
+                        data: coupons
                     }
                 }
             },
             include: {
-                portfolio: true
+                portfolios: true,
+                coupons: true
             }
         })
 
-        return NextResponse.json({ Response: "Committee Creation Successfull!" })
+        return NextResponse.json({ Response: "Committee Creation Successfull!" }, { status: 200 })
     }
-    catch (error) {
-        return NextResponse.json({ Response: "Committee Creation Unsuccessfull!" })
+    catch {
+        return NextResponse.json({ Response: "Committee Creation Unsuccessfull!" }, { status: 400 })
     }
 }
 
