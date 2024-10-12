@@ -1,6 +1,5 @@
 "use client"
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Loader2, Trash } from 'lucide-react'
 import Script from 'next/script'
@@ -14,6 +13,7 @@ import CryptoJS from 'crypto-js'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { useRouter } from 'next/navigation'
 import SparklesText from '@/components/ui/sparkles-text'
+import { Input } from '@/components/ui/input'
 
 function page() {
 

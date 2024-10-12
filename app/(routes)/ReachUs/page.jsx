@@ -1,5 +1,4 @@
 "use client"
-import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import axios from 'axios'
 import { Loader2, MailCheck, MapPinCheckIcon, PhoneCall } from 'lucide-react'
@@ -11,6 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
 import { ReachUsSchema } from '@/schema/ReachUsSchema'
+import { Input } from '@/components/ui/input'
 
 function page() {
 
