@@ -10,7 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
 import { ReachUsSchema } from '@/schema/ReachUsSchema'
-import { Input } from '@/components/ui/input'
+import { Input } from '@/components/Input'
 
 function page() {
 

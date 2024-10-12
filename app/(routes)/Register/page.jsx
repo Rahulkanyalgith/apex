@@ -13,7 +13,7 @@ import CryptoJS from 'crypto-js'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { useRouter } from 'next/navigation'
 import SparklesText from '@/components/ui/sparkles-text'
-import { Input } from '@/components/ui/input'
+import { Input } from '@/components/Input'
 
 function page() {
 
