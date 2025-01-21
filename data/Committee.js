@@ -10,12 +10,12 @@ export const Committees = [
     {
         image: c1,
         title: "UNGA",
-        desc: "Mitigating The Emerging Threats Of Cyber Warfare With Emphasis On The Weaponization Of Artificial Intelligence And Its Implications",
+        desc: "Assessing Military, Diplomatic, and Strategic Responses to secure peace amidst the Kashmir Crisis",
     },
     {
         image: c2,
         title: "UNHRC",
-        desc: "Discussion On The Effective Implementation Of The Right To Privacy With Emphasis On The Human Rights Challenges In The Modern Digital Age",
+        desc: "Addressing Human Rights violations in the Israel-Palestine Conflict",
     },
     {
         image: c3,
@@ -25,23 +25,15 @@ export const Committees = [
     {
         image: c4,
         title: "AIPPM",
-        desc: "Deliberation On The Education & Examination Policies Of The Government With Special Emphasis On The Public Examination (Prevention Of Unfair Means) Bill, 2024",
+        desc: "Deliberation On Anti Terror Laws in India with Special Emphasis on free speech",
     },
-    {
-        image: c5,
-        title: "Fictional Committee",
-        desc: "Continuous Crisis Committee",
-    },
+ 
     {
         image: c6,
         title: "IP",
         desc: "Journalism, Caricature And Photography",
     },
-    {
-        image: c7,
-        title: "ICJ",
-        desc: "South Africa Vs Israel (Genocide Convention Case)",
-    }
+ 
 ];
 
 export const HomeCommittee = [

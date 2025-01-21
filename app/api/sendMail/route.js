@@ -68,7 +68,7 @@ export async function POST(req) {
         <body>
             <div class="content">
                 <div class="container">
-                    <img src="https://apexmun.vercel.app/Logo.png" width="400" alt="Apex Mun - 2024" fetchPriority="high" loading="eager"/>
+                    <img src="https://apexmun.vercel.app/Logo.png" width="400" alt="Apex Mun - 2025" fetchPriority="high" loading="eager"/>
                     <h1 class="heading">Apex Mun - ${year}</h1>
                 </div>
                 <div class="info-container">
