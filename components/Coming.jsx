@@ -38,7 +38,7 @@ function Coming() {
     <div className="flex flex-col items-center justify-center gap-10 py-20 text-gray-200 bg-black">
       <div className="flex flex-col items-center gap-6">
         <h1 className="text-3xl font-black lg:text-6xl">
-          COMING <span className="text-amber-400">THIS February</span>
+          COMING <span className="text-amber-400">THIS FEBRUARY</span>
         </h1>
         <div className="h-1 border-b-4 border-white rounded-full w-60"></div>
         <p className="text-sm text-center lg:text-lg">
