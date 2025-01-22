@@ -57,7 +57,7 @@ function page() {
                     <div className="flex flex-col gap-4">
                         <Link href="/" className="flex items-center gap-4 font-mono font-semibold md:text-xl"><MapPinCheckIcon /> 🇮🇳 Janakpuri, New Delhi</Link>
                         <Link href="/" className="flex items-center gap-4 font-mono font-semibold md:text-xl"><PhoneCall /> +91 7782824824</Link>
-                        <Link href="/" className="flex items-center gap-4 font-mono font-semibold md:text-xl"><MailCheck /> apexmun10@gmail.com</Link>
+                        <Link href="/" className="flex items-center gap-4 font-mono font-semibold md:text-xl"><MailCheck /> apexmun2024@gmail.com</Link>
                     </div>
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col w-full gap-4">

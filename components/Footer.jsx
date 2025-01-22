@@ -35,7 +35,7 @@ function Footer() {
         <div className="w-full h-1 my-6 border-b border-gray-500"></div>
         <div className="flex flex-col items-center justify-between gap-2 lg:flex-row">
           <div className="font-semibold text-gray-600 md:text-xl">Copyright ©  · All Rights Reserved</div>
-          <div className="font-semibold text-gray-600 md:text-xl">Built By Apex MUN.co</div>
+          <div className="font-semibold text-gray-600 md:text-xl">Built By Harshit Ostwal</div>
         </div>
       </div>
     </div>
