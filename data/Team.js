@@ -1,8 +1,7 @@
 import Harshit from "@/public/Team/Harshit.jpg";
 import Aviral from "@/public/Team/Aviral.jpeg";
 import Moksha from "@/public/Team/Mokshu.jpg";
-import Mayank from "@/public/Team/Mayank.jpeg";
-import Anishka from "@/public/Team/Anshika.jpeg";
+import Nirmal from "@/public/Team/Nirmal.jpg";
 import Kashvi from "@/public/Team/Kashvi.jpeg";
 
 export const TemaData = [
@@ -15,16 +14,12 @@ export const TemaData = [
         name: "Harshit Ostwal",
     },
     {
-        image: Mayank,
-        name: "Sangwan Mayank",
+        image: Nirmal,
+        name: "Nirmal Mishra",
     },
     {
         image: Moksha,
         name: "Moksha Kohli",
-    },
-    {
-        image: Anishka,
-        name: "Anshika Jain",
     },
     {
         image: Kashvi,

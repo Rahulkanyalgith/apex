@@ -301,7 +301,7 @@ function page() {
             <Script src="https://checkout.razorpay.com/v1/checkout.js" />
             <div className="flex flex-col justify-center w-11/12 gap-20 md:w-3/4">
                 <div className="leading-none tracking-tighter">
-                    <SparklesText className="text-[5rem] md:text-[7.5rem] lg:text-[9rem] font-black" text={"Apex MUN'24"} />
+                    <SparklesText className="text-[5rem] md:text-[7.5rem] lg:text-[9rem] font-black" text={"Apex MUN'25"} />
                     <h1 className="text-[5rem] md:text-[7.5rem] lg:text-[9rem] font-black">Registration</h1>
                 </div>
 
