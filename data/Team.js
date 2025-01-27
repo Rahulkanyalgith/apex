@@ -3,6 +3,7 @@ import Aviral from "@/public/Team/Aviral.jpeg";
 import Moksha from "@/public/Team/Mokshu.jpg";
 import Nirmal from "@/public/Team/Nirmal.jpg";
 import Kashvi from "@/public/Team/Kashvi.jpeg";
+import Shambhavi from "@/public/Team/Shambhavi.jpeg";
 
 export const TemaData = [
     {
@@ -12,6 +13,10 @@ export const TemaData = [
     {
         image: Harshit,
         name: "Harshit Ostwal",
+    },
+     {
+        image: Shambhavi,
+        name: "Shambhavi",
     },
     {
         image: Nirmal,

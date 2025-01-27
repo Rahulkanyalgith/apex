@@ -7,7 +7,7 @@ import React, { useState } from "react";
 
 function Team() {
   const year = new Date().getFullYear();
-  const [isPaused, setIsPaused] = useState(false); // Pause state for Marquee
+  const [isPaused, setIsPaused] = useState(false);
 
   return (
     <div className="flex flex-col items-center justify-center w-full min-h-screen gap-20 py-20 overflow-hidden bg-gradient-to-b to-white via-green-50 from-white">
@@ -27,8 +27,8 @@ function Team() {
             <div
               key={index}
               className="relative flex flex-col h-full gap-6 p-6 ml-10 overflow-hidden duration-300 border rounded-xl w-fit"
-              onMouseEnter={() => setIsPaused(true)} // Pause marquee on hover
-              onMouseLeave={() => setIsPaused(false)} // Resume marquee on leave
+              onMouseEnter={() => setIsPaused(true)}
+              onMouseLeave={() => setIsPaused(false)}
             >
               <BorderBeam size={250} duration={12} delay={9} />
               <Image
