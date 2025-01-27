@@ -1,4 +1,4 @@
-import Img from "@/public/1.png"
+import Img from "@/public/1.jpg";
 
 export const ReviewData = [
     {

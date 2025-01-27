@@ -1,10 +1,9 @@
-import c1 from "@/public/1.png";
-import c2 from "@/public/2.png";
-import c3 from "@/public/3.png";
-import c4 from "@/public/4.png";
-import c5 from "@/public/5.png";
-import c6 from "@/public/6.png";
-import c7 from "@/public/7.png";
+import c1 from "@/public/1.jpg";
+import c2 from "@/public/2.jpg";
+import c3 from "@/public/3.jpg";
+import c4 from "@/public/4.jpg";
+import c6 from "@/public/6.jpg";
+import c8 from "@/public/8.jpg";
 
 export const Committees = [
     {
@@ -32,6 +31,11 @@ export const Committees = [
         image: c6,
         title: "IP",
         desc: "Journalism, Caricature And Photography",
+    },
+    {
+        image: c8,
+        title: "WHO",
+        desc: "Strengthening Global Healthcare sysytem to address Antibiotic Resistance:With Special Emphasis on Low Income Countries",
     },
  
 ];
